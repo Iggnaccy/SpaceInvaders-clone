@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 033506cca288e8b44a4f82f7f9f09716, type: 3}
-  m_Name: Catalyst
+  m_Script: {fileID: 11500000, guid: 297d22fbd823e8f4b97b302aece11901, type: 3}
+  m_Name: Score
   m_EditorClassIdentifier: 
-  hp: 1
-  minimumSpeed: 20
-  scoreValue: 3
-  displayName: Catalyst
+  score: 0

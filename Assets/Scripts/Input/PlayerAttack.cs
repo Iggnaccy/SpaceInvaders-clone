@@ -9,7 +9,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private InputActionReference attackAction;
     [SerializeField] private PlayerStatsSO playerStats;
     [SerializeField] private Bullet bulletPrefab;
-    [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private Transform bulletSpawnPoint, bulletParent;
 
     [SerializeField, ReadOnly] private float lastAttackTime = -10;
 
@@ -18,14 +18,19 @@ public class PlayerAttack : MonoBehaviour
         attackAction.action.performed += Attack;
     }
 
+    private void OnDestroy()
+    {
+        attackAction.action.performed -= Attack;
+    }
+
     public void Attack(InputAction.CallbackContext context)
     {
-        if(Time.time - lastAttackTime < playerStats.fireRate)
+        if(Time.time - lastAttackTime < playerStats.fireRate || Time.timeScale == 0)
         {
             return;
         }
         lastAttackTime = Time.time;
-        var bullet = bulletPrefab.poolManager.Get().GetComponent<Bullet>();
+        var bullet = bulletPrefab.poolManager.Get(bulletParent).GetComponent<Bullet>();
         bullet.transform.position = bulletSpawnPoint.position;
         bullet.Setup(playerStats.shotDamage, playerStats.bulletSpeed);
     }
