@@ -6,6 +6,7 @@ using UnityEngine;
 using IniParser;
 using IniParser.Model;
 using IniParser.Parser;
+using System.Diagnostics;
 
 public class ConfigManager : MonoBehaviour // Having this only work in the main menu is an explicit choice. Changes should only be looked for and applied outside of gameplay.
 {
@@ -21,7 +22,7 @@ public class ConfigManager : MonoBehaviour // Having this only work in the main 
 
     private void Start()
     {
-        fullPath = Path.GetFullPath(Path.Combine(Application.persistentDataPath, "..", configFileName));
+        fullPath = Path.GetFullPath(Path.Combine(Application.persistentDataPath, configFileName));
         string directory = Path.GetDirectoryName(fullPath);
         string file = Path.GetFileName(fullPath);
 
@@ -54,13 +55,25 @@ public class ConfigManager : MonoBehaviour // Having this only work in the main 
     {
         EnsureConfigExists();
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN
-        System.Diagnostics.Process.Start(fullPath);
+        try
+        {
+            var processInfo = new ProcessStartInfo
+            {
+                FileName = fullPath,
+                UseShellExecute = true
+            };
+            Process.Start(processInfo); // only works on Mono
+        }
+        catch (Exception ex)
+        {
+            UnityEngine.Debug.LogError("Failed to open config file: " + ex.Message);
+        }
 #elif UNITY_STANDALONE_OSX
-        System.Diagnostics.Process.Start("open", fullPath);
+        Process.Start("open", fullPath);
 #elif UNITY_STANDALONE_LINUX
-        System.Diagnostics.Process.Start("xdg-open", fullPath);
+        Process.Start("xdg-open", fullPath);
 #else
-        Debug.LogError("Opening files not possible on this platform");
+        UnityEngine.Debug.LogError("Opening files not possible on this platform");
 #endif
     }
 
