@@ -37,6 +37,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "f310aebc-55d0-4a7b-9599-8e3f5d6679ee",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "1D Axis Wasdy",
                     "id": "a7791b39-0f58-4d5f-8b08-6f0c0684d15f",
                     "path": "1DAxis",

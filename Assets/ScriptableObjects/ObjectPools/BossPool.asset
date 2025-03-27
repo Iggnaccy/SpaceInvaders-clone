@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfd398b6870c1974db1cb70696e62fef, type: 3}
-  m_Name: Simple Settings
+  m_Script: {fileID: 11500000, guid: d7361b60c4c8f754096933daad7f60cb, type: 3}
+  m_Name: BossPool
   m_EditorClassIdentifier: 
-  movementUnitConversionRate: 0.03333334
-  rowHeight: 25
-  downwardMovementSpeedMultiplier: 1
-  downMovementTimeout: 0.5
+  prefab: {fileID: 3733577720633610493, guid: 739d98a36da2dbf45b41a3423162b2b0, type: 3}
